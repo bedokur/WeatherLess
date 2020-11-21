@@ -9,13 +9,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
+        <TextView
             android:id="@+id/item_text_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textAppearance="?attr/textAppearanceHeadline1"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:importantForAutofill="no" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
