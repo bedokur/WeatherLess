@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WeatherLess</string>
     <string name="button">Button</string>
+    <string name="city">City</string>
+    <string name="update">Update</string>
+    <string name="type_city">Type city</string>
 </resources>
