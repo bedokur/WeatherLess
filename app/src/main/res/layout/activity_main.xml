@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/update_buton"
+                android:id="@+id/update_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -44,6 +44,24 @@
                 android:hint="@string/update"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/city_name"
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:hint="@string/city"
+            />
 
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:textSize="40sp"
+            android:hint="@string/temp"
+            />
+    </LinearLayout>
 </ScrollView>

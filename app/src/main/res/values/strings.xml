@@ -4,4 +4,7 @@
     <string name="city">City</string>
     <string name="update">Update</string>
     <string name="type_city">Type city</string>
+    <string name="tt">TT</string>
+    <string name="temp">Temp</string>
+    <string name="clouds">clouds</string>
 </resources>
