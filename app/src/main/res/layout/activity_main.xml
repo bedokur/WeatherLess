@@ -6,70 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:hint="@string/type_city"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center_horizontal"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/city_input"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="50dp"
+                android:hint="@string/type_city"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/update_button"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/city_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/update" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
-                android:hint="@string/update"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/city_name"
-            android:textSize="32sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:hint="@string/city"
-            />
+                android:hint="@string/city"
+                android:textSize="32sp" />
 
-        <TextView
-            android:id="@+id/temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:textSize="40sp"
-            android:hint="@string/temp"
-            />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnBottomSheetModal"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_60"
-            android:layout_marginTop="@dimen/dimen_60"
-            android:text="@string/btn_modal" />
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint="@string/temp"
+                android:textSize="40sp" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBottomSheetModal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60"
+                android:layout_marginTop="@dimen/dimen_60"
+                android:text="@string/btn_modal" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/modal_sheet"
+        layout="@layout/layout_modal_bottom_sheet" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
