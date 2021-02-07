@@ -39,54 +39,21 @@ class MainActivity : AppCompatActivity() {
         binding.updateButton.setOnClickListener { getWeather() }
         val exampleWeatherList = generateSomeList(500)
 
-        binding.bottomSheet.recyclerViewWeather.adapter = ExampleAdapter(exampleWeatherList)
-        binding.bottomSheet.recyclerViewWeather.layoutManager = LinearLayoutManager(this)
-        binding.bottomSheet.recyclerViewWeather.setHasFixedSize(true)
+        val recyclerView = binding.bottomSheet.recyclerViewWeather
 
-//        binding.btnBottomSheetModal.setOnClickListener {
-//            CustomBottomSheetDialogFragment().apply {
-//                show(supportFragmentManager, CustomBottomSheetDialogFragment.TAG)
-//            }
+        recyclerView.adapter = ExampleAdapter(exampleWeatherList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheet)
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
 
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+            }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 // handle onSlide
             }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(
-                        this@MainActivity,
-                        "STATE_COLLAPSED",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(
-                        this@MainActivity,
-                        "STATE_EXPANDED",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(
-                        this@MainActivity,
-                        "STATE_DRAGGING",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(
-                        this@MainActivity,
-                        "STATE_SETTLING",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(
-                        this@MainActivity,
-                        "STATE_HIDDEN",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    else -> Toast.makeText(this@MainActivity, "OTHER_STATE", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-
         })
 
 //        binding.bottomSheet.firstButton.setOnClickListener{Toast.makeText(this@MainActivity, "Hi", Toast.LENGTH_SHORT).show()}
@@ -98,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0 until size){
             val drawable = R.drawable.ic_baseline_wb_sunny_24
+
             val item = WeatherItem(drawable, "Item $i", "Humidity $i")
             list += item
         }
@@ -137,3 +105,34 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+//            override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(
+//                        this@MainActivity,
+//                        "STATE_COLLAPSED",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(
+//                        this@MainActivity,
+//                        "STATE_EXPANDED",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(
+//                        this@MainActivity,
+//                        "STATE_DRAGGING",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(
+//                        this@MainActivity,
+//                        "STATE_SETTLING",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(
+//                        this@MainActivity,
+//                        "STATE_HIDDEN",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    else -> Toast.makeText(this@MainActivity, "OTHER_STATE", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }
