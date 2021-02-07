@@ -8,12 +8,16 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherless.Interface.RetrofitServices
 import com.example.weatherless.common.Common
+import com.example.weatherless.data.WeatherItem
 import com.example.weatherless.databinding.ActivityMainBinding
 import com.example.weatherless.model.Weather
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dmax.dialog.SpotsDialog
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_modal_bottom_sheet.*
 import kotlinx.android.synthetic.main.layout_modal_bottom_sheet.view.*
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,13 +37,17 @@ class MainActivity : AppCompatActivity() {
         mService = Common.retrofitService
         dialog = SpotsDialog.Builder().setCancelable(true).setContext(this).build()
         binding.updateButton.setOnClickListener { getWeather() }
+        val exampleWeatherList = generateSomeList(500)
+
+        binding.bottomSheet.recyclerViewWeather.adapter = ExampleAdapter(exampleWeatherList)
+        binding.bottomSheet.recyclerViewWeather.layoutManager = LinearLayoutManager(this)
+        binding.bottomSheet.recyclerViewWeather.setHasFixedSize(true)
 
 //        binding.btnBottomSheetModal.setOnClickListener {
 //            CustomBottomSheetDialogFragment().apply {
 //                show(supportFragmentManager, CustomBottomSheetDialogFragment.TAG)
 //            }
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheet)
-
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
 
@@ -83,6 +91,17 @@ class MainActivity : AppCompatActivity() {
 
 //        binding.bottomSheet.firstButton.setOnClickListener{Toast.makeText(this@MainActivity, "Hi", Toast.LENGTH_SHORT).show()}
 
+    }
+
+    private fun generateSomeList(size: Int): List<WeatherItem>{
+        val list = ArrayList<WeatherItem>()
+
+        for (i in 0 until size){
+            val drawable = R.drawable.ic_baseline_wb_sunny_24
+            val item = WeatherItem(drawable, "Item $i", "Humidity $i")
+            list += item
+        }
+        return list
     }
 
     private fun getWeather() {
