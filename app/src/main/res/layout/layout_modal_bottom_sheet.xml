@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
+    android:background="@color/teal_700"
     app:behavior_peekHeight="@dimen/dimen_32"
-    android:background="@android:color/transparent"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/firstButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="@dimen/dimen_60"
-        android:text="@string/btn_one"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/list_item_weather_days">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/secondButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="@dimen/dimen_60"
-        android:text="@string/btn_two"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstButton" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/thirdButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="@dimen/dimen_60"
-        android:text="@string/btn_three"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondButton" />
-
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    android:background="@android:color/transparent"-->
