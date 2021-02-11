@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    private fun getWeather() {
+     private fun getWeather() {
         dialog.show()
         val city = binding.cityInput.text.toString().toLowerCase(Locale.ROOT)
 
