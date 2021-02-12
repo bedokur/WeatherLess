@@ -16,9 +16,6 @@ import com.example.weatherless.databinding.ActivityMainBinding
 import com.example.weatherless.model.Weather
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_modal_bottom_sheet.*
-import kotlinx.android.synthetic.main.layout_modal_bottom_sheet.view.*
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Call
