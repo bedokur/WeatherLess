@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 // handle onSlide
             }
@@ -57,10 +58,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun generateSomeList(size: Int): List<WeatherItem>{
+    private fun getWeather() {
+    
+
+    }
+
+
+    private fun generateSomeList(size: Int): List<WeatherItem> {
         val list = ArrayList<WeatherItem>()
 
-        for (i in 0 until size){
+        for (i in 0 until size) {
             val drawable = R.drawable.ic_baseline_wb_sunny_24
 
             val item = WeatherItem(drawable, "Item $i", "Humidity $i")
@@ -69,38 +76,8 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-     private fun getWeather() {
-        dialog.show()
-        val city = binding.cityInput.text.toString().toLowerCase(Locale.ROOT)
-
-        mService.getWeatherUpdate(
-            city = city,
-            appId = "802f2694ef69158bfa043bbb8096fbaa",
-            units = "metric"
-        ).enqueue(object : Callback<Weather> {
-            override fun onFailure(call: Call<Weather>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-                println(t)
-            }
-
-            override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
-                if (response.code() == 200) {
-                    val weather: Weather? = response.body()
-                    binding.cityName.text = city
-                    binding.temperature.text = weather?.main?.temp.toString()
-                } else if (response.code() == 404) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Введите город правильно",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                dialog.dismiss()
-
-            }
-        })
-    }
 }
+
 
 //            override fun onStateChanged(bottomSheet: View, newState: Int) {
 //                when (newState) {
