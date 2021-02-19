@@ -2,7 +2,7 @@ package com.example.weatherless.model
 import com.google.gson.annotations.SerializedName
 
 
-data class Weather(
+data class CurrentWeather(
     @SerializedName("base")
     val base: String,
     @SerializedName("clouds")
@@ -88,3 +88,4 @@ data class Weather(
         val speed: Any
     )
 }
+
