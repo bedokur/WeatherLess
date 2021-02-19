@@ -3,9 +3,7 @@ package com.example.weatherless
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.app.AlertDialog
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +14,10 @@ import com.example.weatherless.databinding.ActivityMainBinding
 import com.example.weatherless.model.Weather
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dmax.dialog.SpotsDialog
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Call
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import java.net.CacheResponse
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -55,12 +54,30 @@ class MainActivity : AppCompatActivity() {
         })
 
 //        binding.bottomSheet.firstButton.setOnClickListener{Toast.makeText(this@MainActivity, "Hi", Toast.LENGTH_SHORT).show()}
+//сделать самособираемые запросы
 
     }
 
     private fun getWeather() {
-    
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            mService.getWeatherUpdate(
+                appId = "802f2694ef69158bfa043bbb8096fbaa",
+                city = binding.cityInput.text.toString(),
+                units = "metric"
+            )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ responce -> onMainResponce(responce) }, { t -> onFailure(t) })
+        )
 
+    }
+    private fun onMainResponce(response: Weather) {
+        binding.temperature.text = response.main.temp.toString()
+        binding.cityName.text = response.name
+    }
+    private fun onFailure(t: Throwable) {
+        Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
     }
 
 
