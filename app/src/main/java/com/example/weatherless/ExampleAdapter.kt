@@ -37,7 +37,6 @@ class ExampleAdapter(private val exampleList: List<Daily>) :
 //        holder.textView1.text = currentItem.dt.toString()
         holder.textView1.text = date.convertLongToTime(currentItem.dt.toLong())
         holder.textView2.text = currentItem.temp.day.toString()
-
     }
 
     override fun getItemCount() = exampleList.size
