@@ -18,7 +18,7 @@ import java.util.*
 
 interface RetrofitServices {
     @GET("weather?")
-    fun getWeatherUpdate(
+    suspend fun getWeatherUpdate(
         @Query("q") city: String,
         @Query("appid") appId: String,
         @Query("units") units: String,
@@ -26,7 +26,7 @@ interface RetrofitServices {
     ) : Observable<CurrentWeather>
 
     @GET("onecall?")
-    fun getOneCall(
+    suspend fun getOneCall(
         @Query("lat") lat:String,
         @Query("lon") long:String,
         @Query("appid") appID:String,

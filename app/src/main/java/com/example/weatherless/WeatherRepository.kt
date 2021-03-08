@@ -1,6 +1,7 @@
 package com.example.weatherless
 
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherless.Interface.RetrofitServices
 import com.example.weatherless.model.CurrentWeather
@@ -11,27 +12,28 @@ import io.reactivex.schedulers.Schedulers
 
 class WeatherRepository {
     lateinit var mService: RetrofitServices
-//    mService = Common.retrofitService
 
-     fun getWeather() {
-        val compositeDisposable = CompositeDisposable()
+    //    mService = Common.retrofitService
+    private val compositeDisposable = CompositeDisposable()
+
+
+    suspend fun getWeather(city: String) {
         compositeDisposable.add(
             mService.getWeatherUpdate(
                 appId = "802f2694ef69158bfa043bbb8096fbaa",
-                city = binding.cityInput.text.toString(),
+                city = city,
                 units = "metric",
                 lang = "ru"
             )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                    { responce -> onMainResponce(responce); getListCall(responce) },
+                    { respond -> suspend { getListCall(respond) }; return@subscribe },
                     { t -> onFailure(t) })
         )
     }
 
-    private fun getListCall(response: CurrentWeather) {
-        val compositeDisposable = CompositeDisposable()
+    suspend fun getListCall(response: CurrentWeather) {
         compositeDisposable.add(
             mService.getOneCall(
                 lat = response.coord.lat.toString(),
@@ -47,19 +49,20 @@ class WeatherRepository {
     }
 
     private fun onMainResponce(response: CurrentWeather) {
-        binding.temperature.text = response.main.temp.toString()
-        binding.cityName.text = response.name
+//        binding.temperature.text = response.main.temp.toString()
+//        binding.cityName.text = response.name
     }
 
 
     private fun onOneCallResponce(response: OneCall) {
-        val recyclerView = binding.bottomSheet.recyclerViewWeather
-        recyclerView.adapter = ExampleAdapter(response.daily)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
+//        val recyclerView = binding.bottomSheet.recyclerViewWeather
+//        recyclerView.adapter = ExampleAdapter(response.daily)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.setHasFixedSize(true)
     }
 
     private fun onFailure(t: Throwable) {
-        Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
     }
+
 }
