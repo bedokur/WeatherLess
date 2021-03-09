@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherless.Interface.RetrofitServices
+import com.example.weatherless.common.Common
 import com.example.weatherless.model.CurrentWeather
 import com.example.weatherless.model.OneCall
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,13 +12,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class WeatherRepository {
-    lateinit var mService: RetrofitServices
+    private val mService: RetrofitServices = Common.retrofitService
 
-    //    mService = Common.retrofitService
+
     private val compositeDisposable = CompositeDisposable()
 
-
-    suspend fun getWeather(city: String) {
+    suspend fun getWeather(city: String, getWeather: (CurrentWeather) -> Unit) {
         compositeDisposable.add(
             mService.getWeatherUpdate(
                 appId = "802f2694ef69158bfa043bbb8096fbaa",
@@ -28,7 +28,9 @@ class WeatherRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                    { respond -> suspend { getListCall(respond) }; return@subscribe },
+                    { responce ->
+                        getWeather(responce)
+                    },
                     { t -> onFailure(t) })
         )
     }

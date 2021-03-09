@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
-                    android:onClick="@{() -> MainActivity.getWeatherUpd(viewModel.city)}"
+                    android:onClick="@{() -> viewModel.getWeather()}"
                     android:hint="@string/update"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>

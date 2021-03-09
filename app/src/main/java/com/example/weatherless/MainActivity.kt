@@ -3,6 +3,7 @@ package com.example.weatherless
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
@@ -21,12 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+
 //        binding.updateButton.setOnClickListener { WeatherRepository().getWeather() }
         sharedViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        sharedViewModel.vMCity.observe(this, androidx.lifecycle.Observer {
-
-        })
+        binding.viewModel = sharedViewModel
+        binding.lifecycleOwner = this
+        setContentView(binding.root)
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.bottomSheet)
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -39,9 +41,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 //        binding.bottomSheet.firstButton.setOnClickListener{Toast.makeText(this@MainActivity, "Hi", Toast.LENGTH_SHORT).show()}
+
+//        val cityname = sharedViewModel.city.value.toString()
+//        if (cityname.isEmpty()) {
+//            Toast.makeText(this@MainActivity, cityname, Toast.LENGTH_SHORT).show()
+        }
+
     }
 
-    fun getWeatherUpd(city: String){
-        sharedViewModel.getWeather(city)
-    }
-}

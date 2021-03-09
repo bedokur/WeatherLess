@@ -22,13 +22,14 @@ class MainActivityViewModel : ViewModel() {
     private val _wind = MutableLiveData<String>()
     val wind: LiveData<String> = _wind
 
-    @Bindable
-    val vMCity = MutableLiveData<String>()
+    val city = MutableLiveData<String>()
 
 
-    fun getWeather(city: String) {
-        coroutineScope.launch {
-            val wG = wRepo.getWeather(vMCity.toString())
+    fun getWeather() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val wG = city.value?.let { wRepo.getWeather(it) {
+
+            } }
         }
     }
 }
